@@ -7,6 +7,8 @@ const createError = require("http-errors");
 var product = require('./routes/product.route'); // Imports routes for the products
 var app = express();
 
+// logger
+const logger = require('./conf/logger');
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
@@ -21,7 +23,8 @@ mongoose.connect(mongoDB, {
 });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', logger.error.bind(logger, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -45,7 +48,7 @@ app.use(function(err, req, res, next) {
 var port = process.env.SERVER_PORT || 3333;
 
 var server = app.listen(port, () => {
-    console.log('Server is up and running on port number ' + port);
+    logger.info('Server is up and running on port number ' + port);
 });
 
 module.exports = server;

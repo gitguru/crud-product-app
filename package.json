@@ -17,7 +17,8 @@
     "http-errors": "^1.7.2",
     "mocha": "^7.1.1",
     "mongoose": "^5.9.6",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "winston": "^3.2.1"
   },
   "engines": {
     "node": "v13.9.0"
